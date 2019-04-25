@@ -10,10 +10,10 @@ ARG BASE_URL=https://www-us.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binar
 
 
 RUN apt-get update -y \
-    && apt-get upgrade -y \
     && apt install -y openjdk-8-jdk \
-    && apt-get install -y jq \
-    && apt-get install -y xalan \
+    jq \
+    xalan \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /usr/share/maven /usr/share/maven/ref \
     && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
     && echo "${SHA}  /tmp/apache-maven.tar.gz" | sha512sum -c - \
@@ -23,8 +23,6 @@ RUN apt-get update -y \
     && apt-get clean \
     && apt-get autoremove -y
 
-ENV MAVEN_HOME /usr/share/maven
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
-ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+ENV MAVEN_HOME="/usr/share/maven" JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" MAVEN_CONFIG="$USER_HOME_DIR/.m2"
 
 CMD ["mvn"]
