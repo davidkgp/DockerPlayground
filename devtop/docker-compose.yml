@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  intellijapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test-intellij
+    volumes:
+      - intellij-disk:/root/IdeaIC2019.1:rw
+      - intellij-disk-work:/root/IdeaProjects:rw
+    environment:
+      DISPLAY: <ip_x11_server>:0.0
+
+volumes:
+  intellij-disk:
+  intellij-disk-work:

@@ -36,4 +36,4 @@ RUN apt-get update -y \
 
 ENV MAVEN_HOME="/usr/share/maven" JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" MAVEN_CONFIG="$USER_HOME_DIR/.m2"
 
-CMD ["idea.sh","-Djava.awt.headless=true"]
+CMD ["idea.sh"]
