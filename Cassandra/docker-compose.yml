@@ -1,0 +1,29 @@
+version: '3.4'
+services:
+  cassandra-seed:
+    image: 'cassandra:3.11.5'
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    container_name: cassandra1
+    volumes:
+      - cass1:/var/lib/cassandra:rw
+    restart: always
+    environment:
+      - CASSANDRA_SEEDS=cassandra-seed
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+
+  cassandranode2:
+    image: 'cassandra:3.11.5'
+    container_name: cassandra2
+    volumes:
+      - cass2:/var/lib/cassandra:rw
+    restart: always
+    environment:
+      - CASSANDRA_SEEDS=cassandra-seed
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=datacenter1
+volumes:
+  cass1:
+  cass2:
