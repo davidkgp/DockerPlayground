@@ -1,5 +1,5 @@
 CREATE TABLE public.addresses (
-    address_id int PRIMARY KEY,
+    address_id SERIAL PRIMARY KEY,
     addressLine1 varchar(255),
     addressLine2 varchar(255)
 );
@@ -9,7 +9,7 @@ CREATE TABLE public.students (
     firstName varchar(255),
     lastName varchar(255),
     age int,
-    address_id int references addresses
+    address_id SERIAL references addresses
 );
 
 INSERT INTO public.addresses
@@ -43,4 +43,8 @@ VALUES('AG125', 'Sierra', 'Joyce', 30, 3);
 INSERT INTO public.students
 (id, firstname, lastname, age, address_id)
 VALUES('AG126', 'Roger', 'Day', 28, 4);
+
+CREATE SEQUENCE address_hibernate_sequence START 5;
+CREATE SEQUENCE student_roll START 1;
+
 
